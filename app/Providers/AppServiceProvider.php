@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\AdoptionRepository;
+use App\Repositories\AdoptionRepositoryInterface;
 use App\Repositories\PetRepository;
 use App\Repositories\PetRepositoryInterface;
 use Illuminate\Support\Facades\Vite;
@@ -15,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(PetRepositoryInterface::class, PetRepository::class);
-
+        $this->app->bind(AdoptionRepositoryInterface::class, AdoptionRepository::class);
     }
 
     /**

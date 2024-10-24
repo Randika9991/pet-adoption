@@ -1,5 +1,4 @@
 <template>
-    <Head title="Pet Dashboard" />
 
     <AuthenticatedLayout>
         <template #header>

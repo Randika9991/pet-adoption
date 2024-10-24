@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdoptionApplicationController;
 use App\Http\Controllers\PetController;
+use App\Http\Controllers\ad;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -43,5 +45,19 @@ Route::get('/pets/{id}/edit', [PetController::class, 'edit'])->middleware(['auth
 Route::post('/pets/edit/{id}', [PetController::class, 'update'])->name('pets.edit');
 
 Route::delete('/pets/{id}', [PetController::class, 'destroy'])->middleware(['auth', 'verified'])->name('pets.destroy');
+
+
+/////////////////////////////////////////////////////////////form page/////////////////////////////////////////////////////////////////
+
+Route::get('/adoption/applyForm/{id}', [AdoptionApplicationController::class, 'showForm'])->name('adoption.applyForm');
+
+Route::post('/adoption/create', [AdoptionApplicationController::class, 'create'])->name('adoption.create');
+
+Route::get('/adoptiondetails', [AdoptionApplicationController::class, 'index'])->middleware(['auth', 'verified'])->name('adoptiondetails');
+
+Route::get('/adoption/{id}', [AdoptionApplicationController::class, 'show'])->name('adoption.show');
+
+Route::patch('/adoption/{id}', [AdoptionApplicationController::class, 'update'])->name('adoption.edit');
+
 
 require __DIR__.'/auth.php';

@@ -51,6 +51,17 @@ const showingNavigationDropdown = ref(false);
                                     pet
                                 </NavLink>
                             </div>
+
+                            <div
+                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                            >
+                                <NavLink
+                                    :href="route('adoptiondetails')"
+                                    :active="route().current('adoptiondetails')"
+                                >
+                                    AdoptionDetails
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div class="hidden sm:ms-6 sm:flex sm:items-center">

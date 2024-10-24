@@ -3,9 +3,8 @@
 
     <AuthenticatedLayout>
         <template #header>
-            <div class="flex justify-between items-center">
+            <div class="h-3 flex justify-between items-center">
                 <a class="text-black px-4 py-2 rounded">Pet</a>
-
                 <template v-if="pet">
                     <a :href="`/pets/${pet.id}/edit`" class="block bg-white shadow-md rounded-lg overflow-hidden">
                         <button type="button"
@@ -21,17 +20,16 @@
                         Delete Pet
                     </button>
                 </template>
-
             </div>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="dark:bg-black overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="py-12">
+        <div class="py-5">
+            <div class="max-w-7xl mx-auto h-full sm:px-6 lg:px-8">
+                <div class="dark:bg-black h-full overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="py-4">
                         <!-- Display pet details -->
-                        <template v-if="pet">
-                            <div class="grid md:grid-cols-2 gap-4 w-full min-h-screen">
+                        <template v-if="pet" class="">
+                            <div class="grid md:grid-cols-2 gap-4 w-full h-full">
                                 <!-- Left Column: Pet Details -->
                                 <div class="dark:bg-black shadow-md rounded-lg p-6 ">
                                     <h1 class="text-3xl text-center text-gray-800 dark:text-white mb-6">{{ pet.petname }}</h1>

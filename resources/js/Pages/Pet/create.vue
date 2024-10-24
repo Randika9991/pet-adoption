@@ -131,21 +131,24 @@ export default {
         this.form.name = user.name;
         this.form.email = user.email;
     },
-
     methods: {
         handleImageUpload(event) {
             this.form.image = event.target.files[0]; // Get the file
         },
         submitForm() {
             let formData = new FormData();
-
             for (let key in this.form) {
                 formData.append(key, this.form[key]);
             }
-
             this.$inertia.post(this.route('pets.create'), formData, {
-                forceFormData: true,
-            });
+                    onSuccess: () => {
+                        alert("added success")
+                    },
+                    onError: (error) => {
+                        console.error('Error deleting pet:', error);
+                    }
+                }
+            );
         }
     }
 }
