@@ -46,10 +46,9 @@ Route::post('/pets/edit/{id}', [PetController::class, 'update'])->name('pets.edi
 
 Route::delete('/pets/{id}', [PetController::class, 'destroy'])->middleware(['auth', 'verified'])->name('pets.destroy');
 
+Route::get('/adoption/applyForm/{id}', [PetController::class, 'showForm'])->name('adoption.applyForm');
 
 /////////////////////////////////////////////////////////////form page/////////////////////////////////////////////////////////////////
-
-Route::get('/adoption/applyForm/{id}', [AdoptionApplicationController::class, 'showForm'])->name('adoption.applyForm');
 
 Route::post('/adoption/create', [AdoptionApplicationController::class, 'create'])->name('adoption.create');
 

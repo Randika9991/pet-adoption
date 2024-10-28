@@ -5,7 +5,6 @@
                 <div class="py-4">
                     <!-- Display pet details -->
                     <template v-if="pet" class="">
-
                         <form @submit.prevent="submitForm" :action="route('pets.edit', form.id)" method="POST" enctype="multipart/form-data">
                             <label for="petname" class="px-4 gap-4 text-gray-700">edit pet</label>
                             <div class="grid md:grid-cols-2 gap-4 w-full h-full">

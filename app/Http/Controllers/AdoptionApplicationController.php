@@ -1,46 +1,25 @@
 <?php
+// app/Http/Controllers/AdoptionApplicationController.php
 
 namespace App\Http\Controllers;
 
-use App\Mail\sendmail;
-use App\Models\AdoptionApplication;
 use App\Models\Pet;
-use App\Repositories\AdoptionRepositoryInterface;
-use App\Repositories\PetRepositoryInterface;
+use App\Services\AdoptionServiceInterface;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\View\View;
 use Inertia\Inertia;
-
-// Add this at the top of your controller if not already imported
 
 class AdoptionApplicationController extends Controller
 {
-    protected $adoptionRepository;
-    protected $petRepository;
+    protected $adoptionService;
 
-    public function __construct(AdoptionRepositoryInterface $adoptionRepository,PetRepositoryInterface $petRepository)
+    public function __construct(AdoptionServiceInterface $adoptionService )
     {
-        $this->adoptionRepository = $adoptionRepository;
-        $this->petRepository = $petRepository;
-    }
-
-    public function showForm($id)
-    {
-        $pets = $this->petRepository->find($id);
-        $user = auth()->user();
-        return Inertia::render('adoption/index', [
-            'pets' => $pets, // Pass pets data to the Vue component
-            'user' => $user,
-        ]);
+        $this->adoptionService = $adoptionService;
     }
 
     public function create(Request $request)
     {
-//        dd($request);
-        $this->adoptionRepository->create([
+        $this->adoptionService->create([
             'pet_id' => $request->input('pet_id'),
             'user_id' => $request->input('user_id'),
             'user_name' => $request->input('user_name'),
@@ -48,14 +27,12 @@ class AdoptionApplicationController extends Controller
             'application_date' => $request->input('application_date'),
             'status' => 'pending',
         ]);
-        return redirect()->route('pet')->with('success', 'Your adoption application has been submitted.');
+        return redirect()->route('adoptiondetails')->with('success', 'Your adoption application has been submitted.');
     }
-
-
 
     public function index()
     {
-        $adoption = $this->adoptionRepository->all(); // Adjust the number for pagination as needed
+        $adoption = $this->adoptionService->all();
         return Inertia::render('adoption/adoptionDetails', [
             'adoption' => $adoption,
         ]);
@@ -63,9 +40,8 @@ class AdoptionApplicationController extends Controller
 
     public function show($id)
     {
-//      dd($id);
-        $adoption =  $this->adoptionRepository->find($id);
-        $pets = $this->petRepository->find($adoption->pet_id);
+        $adoption = $this->adoptionService->find($id);
+        $pets = Pet::find($adoption->pet_id); // Keep pet fetching here
 
         return Inertia::render('adoption/edit', [
             'adoption' => $adoption,
@@ -81,41 +57,11 @@ class AdoptionApplicationController extends Controller
             'user_name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'application_date' => 'required|date',
-            'status' => 'required|string' // Ensure that status is also validated
+            'status' => 'required|string',
         ]);
 
-        logger($validatedData);
+        $adoption = $this->adoptionService->update($id, $validatedData);
 
-        $adoption = AdoptionApplication::findOrFail($id);
-
-        if (!$adoption) {
-            return redirect()->route('pets')->with('error', 'Adoption application not found!');
-        }
-
-        $adoption->update([
-            'pet_id' => $validatedData['pet_id'],
-            'user_id' => $validatedData['user_id'],
-            'user_name' => $validatedData['user_name'],
-            'email' => $validatedData['email'],
-            'application_date' => $validatedData['application_date'],
-            'status' => $validatedData['status'],
-        ]);
-
-        $save = $adoption->save();
-
-
-        if ($save) {
-            try {
-                $email = Mail::to($adoption->email)->send(new sendmail($adoption));
-                if ($email) {
-                    return redirect()->route('adoptionDetails', $adoption->pet_id)->with('message', 'Adoption application updated successfully!');
-                }
-            } catch (\Exception $e) {
-                dd($e);
-            }
-        }else{
-            echo "error";
-        }
+        return redirect()->route('adoptiondetails', $adoption->pet_id)->with('message', 'Adoption application updated successfully!');
     }
 }
-

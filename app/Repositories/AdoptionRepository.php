@@ -23,9 +23,9 @@ class AdoptionRepository implements AdoptionRepositoryInterface
 
     public function update($id, array $data)
     {
-        $pet = AdoptionApplication::findOrFail($id);
-        $pet->update($data);
-        return $pet;
+//        $pet = AdoptionApplication::findOrFail($id);
+//        $pet->update($data);
+//        return $pet;
     }
 
     public function delete($id)
@@ -35,6 +35,6 @@ class AdoptionRepository implements AdoptionRepositoryInterface
 
     public function findByUserId($userId,$perPage = 3)
     {
-        return AdoptionApplication::where('user_id', $userId)->latest()->paginate($perPage);
+//        return AdoptionApplication::where('user_id', $userId)->latest()->paginate($perPage);
     }
 }

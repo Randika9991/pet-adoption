@@ -33,4 +33,5 @@ class AdoptionApplication extends Model
     {
         return $this->belongsTo(Pet::class);
     }
+
 }

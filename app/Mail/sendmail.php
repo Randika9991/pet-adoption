@@ -3,9 +3,7 @@
 namespace App\Mail;
 
 use App\Models\AdoptionApplication;
-use App\Models\Pet;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -40,10 +38,11 @@ class sendmail extends Mailable
      */
     public function content(): Content
     {
-        dd("send");
-//        return new Content(
-//            view: 'mail.sendmail',
-//        );
+//        dd("send");
+        return new Content(
+            view: 'mail.sendmail', // This points to the Blade view
+        // Passing data to the view
+        );
     }
 
     /**
