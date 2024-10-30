@@ -10,12 +10,7 @@ use App\Mail\PetAddedMail;
 
 class SendPetAddedNotification
 {
-    /**
-     * Handle the event.
-     *
-     * @param  PetAdded  $event
-     * @return void
-     */
+
     public function handle(PetAdded $event)
     {
         // Send email to admin about the new pet

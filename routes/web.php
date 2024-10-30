@@ -4,6 +4,9 @@ use App\Http\Controllers\AdoptionApplicationController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\ad;
 use App\Http\Controllers\ProfileController;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -58,5 +61,14 @@ Route::get('/adoption/{id}', [AdoptionApplicationController::class, 'show'])->na
 
 Route::patch('/adoption/{id}', [AdoptionApplicationController::class, 'update'])->name('adoption.edit');
 
+///////////////////////////////////////////////////////////////////test json value in eloquent//////////////////////////
+
+Route::get('/user/{id}', function (string $id) {
+    return new UserResource(User::findOrFail($id));
+});
+
+Route::get('/users', function () {
+    return UserResource::collection(User::all()->keyBy->id);
+});
 
 require __DIR__.'/auth.php';

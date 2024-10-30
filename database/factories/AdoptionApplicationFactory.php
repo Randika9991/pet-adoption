@@ -30,3 +30,26 @@ class AdoptionApplicationFactory extends Factory
     }
 
 }
+
+
+//මෙම AdoptionApplicationFactory එක, adoption application එකක් සඳහා default values define කරන්න ලැහැස්ති කරනවා.
+// මේකෙන් Laravel එකේ testing වලට fake data generate කර ගන්න පුළුවන්.
+
+//Factory එක Run කිරීමේ පියවර:------
+
+    //Tinker හරහා Fake Data Generate කිරීම: Laravel එකේ Tinker tool එක භාවිතා කරලා interactively fake data generate කරන්න පුළුවන්.
+    //පළමුව Tinker එක run කරන්න:
+        //php artisan tinker
+
+        //එක record එකක් create කිරීමට:
+            //AdoptionApplication::factory()->create();
+
+        //නැතහොත් multiple records create කරන්න:
+            //AdoptionApplication::factory()->count(10)->create();
+
+
+
+
+
+
+

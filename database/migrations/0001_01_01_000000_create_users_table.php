@@ -47,3 +47,28 @@ return new class extends Migration
         Schema::dropIfExists('sessions');
     }
 };
+
+//Laravel හි migrate command එක මගින් ඔබට database schema එක තනා ගැනීම හෝ වෙනස් කිරීම සඳහා migration ගොනු ක්‍රියාත්මක කළ හැකිය.
+//Migrations ක්‍රියාත්මක කිරීමේ පියවර
+//Migration ක්‍රියාත්මක කිරීමට, පහත command එක භාවිතා කරන්න:
+                //php artisan migrate
+                //=====================//
+                //මෙම command එක ක්‍රියාත්මක කිරීමෙන්, Laravel මගින් database/migrations ෆෝල්ඩරයේ සියලුම migration ගොනු කියවයි.
+
+                //සෑම migration ගොනුවක් සඳහාම Laravel මගින් up විධිය ක්‍රියාත්මක කරයි. මෙහිදී, නව ටේබල්ස් තැනීම, columns එකතු කිරීම වැනි වෙනස්කම් සිදු කරයි.
+                //ක්‍රියාත්මක කරන ලද migration එක migrations ටේබල් එක තුළ "සම්පූර්ණ වූ" ලෙස ලකුණු කරයි.
+
+
+        //තවත් Migration Commands
+
+                //Rollback: ආසන්නතම migration එක අවලංගු කිරීමට:
+                //php artisan migrate:rollback
+
+                //Reset: සියලුම migrations අවලංගු කිරීමට:
+                //php artisan migrate:reset
+
+                //Refresh: සියලුම migrations reset කර නැවත ක්‍රියාත්මක කිරීමට:
+                //php artisan migrate:refresh
+
+                //Fresh: සියලු tables drop කර නැවත සියලුම migrations ක්‍රියාත්මක කිරීමට:
+                //php artisan migrate:fresh

@@ -20,3 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AdoptionApplicationSeeder::class);
     }
 }
+
+
+//සියලුම seeders run කිරීමට:
+
+//php artisan db:seed
